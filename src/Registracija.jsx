@@ -3,7 +3,8 @@ import React, { useState } from "react";
 export const Registracija = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
-    const [name, setName] = useState('');
+    const [name, setName]=useState('');
+    const [lastname, setLastname] = useState('');
     const [username, setUsername] = useState('');
 
     const handleSubmit = (e) => {
@@ -17,8 +18,8 @@ export const Registracija = (props) => {
         <form className="register-form" onSubmit={handleSubmit}>
             <label htmlFor="name">Unesite svoje ime</label>
             <input value={name} name="name" onChange={(e) => setName(e.target.value)} id="name"/>
-            <label htmlFor="name">Unesite svoje prezime</label>
-            <input value={name} name="name" onChange={(e) => setName(e.target.value)} id="name"/>
+            <label htmlFor="lastname">Unesite svoje prezime</label>
+            <input value={lastname} name="lastname" onChange={(e) => setLastname(e.target.value)} id="lastname"/>
             <label htmlFor="email">Unesite svoj email</label>
             <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" id="email" name="email" />
             <label htmlFor="username">Unesite svoje korisničko ime</label>

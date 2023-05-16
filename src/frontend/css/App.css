@@ -24,7 +24,8 @@
 @media screen and (min-width: 600px) {
 
   .auth-form-container,
-  .putovanje-form-container {
+  .putovanje-form-container,
+  .pregled-putovanja-container{
     padding: 5rem;
     padding-top: 10px;
     border: 2px solid white;
@@ -65,9 +66,44 @@ button {
   font-family: sans-serif;
   font-size: 14px;
   margin-top: 20px;
+  font-weight: bold;
 }
 
 .gumb:hover {
   background-color: cornsilk;
   color: coral;
+}
+
+.putovanja-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.putovanja-table th,
+.putovanja-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.putovanja-table th {
+  font-weight: bold;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  padding-right: 8rem; /* Dodajte dovoljno prostora s desne strane inputa za ikonu */
+}
+
+.password-container .eye-icon {
+  color: #7439db;
+  position: absolute;
+  top: 50%;
+  right: 0.75rem; /* Prilagodite vrijednost prema potrebi */
+  transform: translateY(-50%);
+  cursor: pointer;
 }

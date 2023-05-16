@@ -5,6 +5,8 @@ import { Homepage } from "./frontend/components/Dashboard/Homepage"
 import { Login } from "./frontend/components/Auth/Login";
 import { Registracija } from "./frontend/components/Auth/Registracija";
 import { UnosPutovanja } from "./frontend/components/Dashboard/UnosPutovanja";
+import { ListaPutovanja } from "./frontend/components/Dashboard/ListaPutovanja";
+import { InformacijeRacuna } from "./frontend/components/Dashboard/InformacijeRacuna";
 
 function App() {
   const [currentForm, setCurrentForm] = useState('login');
@@ -21,6 +23,8 @@ function App() {
           <Route path="/prijava" element={<Login />} />
           <Route path="/registracija" element={<Registracija />} />
           <Route path="/unosPutovanja" element={<UnosPutovanja />} />
+          <Route path="/listaPutovanja" element={<ListaPutovanja />} />
+          <Route path="/informacijeRacuna" element={<InformacijeRacuna />} />
 
         </Routes>
       </Router>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import Axios from "axios";
+
 
 export const Registracija = (props) => {
     const navigate = useNavigate();
@@ -11,14 +13,27 @@ export const Registracija = (props) => {
     const [name, setName] = useState('');
     const [lastname, setLastname] = useState('');
     const [username, setUsername] = useState('');
-
+    const [registerStatus, setRegisterStatus] = useState("");
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleSubmit = (e) => {
+    const register = (e) => {
         e.preventDefault();
-        console.log(email);
+    Axios.post("http://localhost:3306/registracija", {
+      name:name,
+      lastname:lastname,
+      email: email,
+      username: username,
+      password: pass,
+    }).then((response) => {
+      
+      if(response.data.message){
+        setRegisterStatus(response.data.message);
+      }else{
+        setRegisterStatus("ACCOUNT CREATED SUCCESSFULLY");
+      }
+    })
     }
 
     const handlePrijava = () => {
@@ -28,7 +43,7 @@ export const Registracija = (props) => {
     return (
         <div className="auth-form-container">
             <h2 className="header">Registracija</h2>
-            <form className="register-form" onSubmit={handleSubmit}>
+            <form className="register-form" onSubmit={register}>
                 <label htmlFor="name">Unesite svoje ime</label>
                 <input
                     value={name}
@@ -79,7 +94,8 @@ export const Registracija = (props) => {
                     </div>
                 </div>
 
-                <button className="gumb" type="submit">Registriraj se</button>
+                <button className="gumb" type="submit" onClick={register}>Registriraj se</button>
+                <h1 style={{fontSize: '15px', textAlign: 'center', marginTop: '20px'}}>{registerStatus}</h1>
             </form>
             {<button className="link-btn" onClick={handlePrijava}>Već imate račun? Prijavite se ovdje.</button>}
         </div>

@@ -5,10 +5,10 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const db = mysql.createConnection({
-    host: 'localhost', // Adresa vašeg MySQL poslužitelja
-    user: 'bcrnkovic', // Korisničko ime vaše baze podataka
-    password: '11', // Lozinka vaše baze podataka
-    database: 'bcrnkovic', // Naziv vaše baze podataka
+    host: 'student.veleri.hr', // Adresa vašeg MySQL poslužitelja
+    user: 'bcrnkovic', // Korisničko ime  baze podataka
+    password: '11', // Lozinka  baze podataka
+    database: 'bcrnkovic', // Naziv baze podataka
     multipleStatements: true
 });
 

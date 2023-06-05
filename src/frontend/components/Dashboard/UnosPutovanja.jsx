@@ -5,6 +5,8 @@ export const UnosPutovanja = () => {
     const [mjestoDolaska, setMjestoDolaska] = useState('');
     const [vrstaVozila, setVrstaVozila] = useState('');
     const [datumPutovanja, setDatumPutovanja] = useState('');
+    const [brojKilometara, setBrojKilometara] = useState('');
+    const [prosjecnaPotrosnja, setProsjecnaPotrosnja] = useState('');
     const [trosak, setTrosak] = useState('');
 
     const handleSubmit = (e) => {
@@ -17,6 +19,14 @@ export const UnosPutovanja = () => {
         <div className="putovanje-form-container">
             <h2 className="header">Unos putovanja</h2>
             <form className="putovanje-form" onSubmit={handleSubmit}>
+                <label htmlFor="datumPutovanja">Odaberite datum putovanja</label>
+                <input
+                    value={datumPutovanja}
+                    onChange={(e) => setDatumPutovanja(e.target.value)}
+                    type="date"
+                    id="datumPutovanja"
+                    name="datumPutovanja" />
+
                 <label htmlFor="mjestoPolaska">Unesite mjesto polaska</label>
                 <input
                     value={mjestoPolaska}
@@ -31,6 +41,14 @@ export const UnosPutovanja = () => {
                     onChange={(e) => setMjestoDolaska(e.target.value)}
                     id="mjestoDolaska" />
 
+                <label htmlFor="brojKilometara">Unesite broj kilometara</label>
+                <input
+                    value={brojKilometara}
+                    onChange={(e) => setBrojKilometara(e.target.value)}
+                    type="number"
+                    id="brojKilometara"
+                    name="brojKilometara" />
+
                 <label htmlFor="vrstaVozila">Odaberite vrstu vozila</label>
                 <select
                     value={vrstaVozila}
@@ -42,13 +60,13 @@ export const UnosPutovanja = () => {
                     <option value="autobus">Motor</option>
                 </select>
 
-                <label htmlFor="datumPutovanja">Odaberite datum putovanja</label>
+                <label htmlFor="prosjecnaPotrosnja">Unesite prosječnu potrošnju goriva (l/km)</label>
                 <input
-                    value={datumPutovanja}
-                    onChange={(e) => setDatumPutovanja(e.target.value)}
-                    type="date"
-                    id="datumPutovanja"
-                    name="datumPutovanja" />
+                    value={prosjecnaPotrosnja}
+                    onChange={(e) => setProsjecnaPotrosnja(e.target.value)}
+                    type="number"
+                    id="prosjecnaPotrosnja"
+                    name="prosjecnaPotrosnja" />
 
                 <button className="gumb" type="submit">Izračunaj trošak</button>
             </form>

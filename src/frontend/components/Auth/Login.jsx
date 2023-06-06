@@ -28,7 +28,7 @@ export const Login = (props) => {
       } else {
         const idKorisnika = response.data[0].ID_korisnika; // Dobivanje ID-a korisnika iz odgovora
         handleLogin(idKorisnika); // Poziv handleLogin funkcije iz konteksta
-        navigate('/informacijeRacuna');
+        navigate('/unosPutovanja');
       }
     })
   }

@@ -1,34 +1,38 @@
-import React, { useState } from "react"; 
-import { useNavigate } from 'react-router-dom'; 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; 
-import { faEye } from "@fortawesome/free-solid-svg-icons"; 
-import axios from "axios"; // Uvoz Axios biblioteke za izvršavanje HTTP zahtjeva
+import React, { useState, useContext } from "react"; // Uvoz useContext kuke
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { UserContext } from "../../../App";
 
 export const Login = (props) => {
-    const navigate = useNavigate(); // Korištenje useNavigate kuke za navigaciju
-    const [showPassword, setShowPassword] = useState(false); // Korištenje useState kuke za praćenje stanja prikazivanja/skrivanja lozinke
-    const [username, setUsername] = useState(''); // Korištenje useState kuke za praćenje unosa korisničkog imena
-    const [pass, setPass] = useState(''); // Korištenje useState kuke za praćenje unosa lozinke
-    const [loginStatus, setLoginStatus] = useState(""); // Korištenje useState kuke za praćenje statusa prijave
-    
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword); // Funkcija za promjenu stanja prikazivanja/skrivanja lozinke
-    };
+  const { handleLogin } = useContext(UserContext); // Dobivanje handleLogin funkcije iz konteksta
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState('');
+  const [pass, setPass] = useState('');
+  const [loginStatus, setLoginStatus] = useState("");
 
-    const login = (e) => {
-        e.preventDefault(); // Sprječavanje podrazumijevane radnje obrasca prijave
-        axios.post("http://localhost:3001/prijava", { // Slanje POST zahtjeva na određeni URL
-            username: username, // Slanje unesenog korisničkog imena
-            password: pass, // Slanje unesene lozinke
-        }).then((response) => {
-            if (response.data.message) { // Provjera odgovora od poslužitelja na temelju poruke
-                setLoginStatus(response.data.message); // Ažuriranje statusa prijave s porukom odgovora
-            } else {
-                setLoginStatus(response.data[0].email); // Ažuriranje statusa prijave s e-poštom iz odgovora
-                navigate('/informacijeRacuna'); // Navigacija na "/informacijeRacuna" rutu
-            }
-        })
-    }
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const login = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:3001/prijava", {
+      username: username,
+      password: pass,
+    }).then((response) => {
+      if (response.data.message) {
+        setLoginStatus(response.data.message);
+      } else {
+        const idKorisnika = response.data[0].ID_korisnika; // Dobivanje ID-a korisnika iz odgovora
+        handleLogin(idKorisnika); // Poziv handleLogin funkcije iz konteksta
+        navigate('/informacijeRacuna');
+      }
+    })
+  }
+
 
     const handleRegistracija = () => {
         navigate('/registracija'); // Navigacija na "/registracija" rutu

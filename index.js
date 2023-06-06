@@ -5,7 +5,7 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const db = mysql.createConnection({
-    host: 'student.veleri.hr', // Adresa vašeg MySQL poslužitelja
+    host: 'student.veleri.hr', // Adresa MySQL poslužitelja
     user: 'bcrnkovic', // Korisničko ime  baze podataka
     password: '11', // Lozinka  baze podataka
     database: 'bcrnkovic', // Naziv baze podataka
@@ -59,7 +59,6 @@ app.post("/prijava", (req, res) => {
             } else {
                 if (result.length > 0) {
                     res.send(result);
-                    res.redirect('/unosPutovanja');
                 } else {
                     res.send({ message: "Krivo korisničko ime ili lozinka!" });
                 }

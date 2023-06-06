@@ -8,34 +8,35 @@ import { UnosPutovanja } from "./frontend/components/Dashboard/UnosPutovanja";
 import { ListaPutovanja } from "./frontend/components/Dashboard/ListaPutovanja";
 import { InformacijeRacuna } from "./frontend/components/Dashboard/InformacijeRacuna";
 
+export const UserContext = React.createContext(); // Kreiranje konteksta
+
 function App() {
-  const [currentForm, setCurrentForm] = useState('login');
-  const [idKorisnika, setIdKorisnika] = useState(null); // Varijabla stanja za pohranu ID korisnika
+  const [idKorisnika, setIdKorisnika] = useState(null); // Dodavanje idKorisnika kao stanje
 
-  // Funkcija za prebacivanje između različitih obrazaca (prijava i registracija)
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  }
-
-  // Funkcija za obradu prijave korisnika i postavljanje ID-a korisnika
   const handleLogin = (id) => {
-    setIdKorisnika(id);
-  }
+    setIdKorisnika(id); // Pohrana ID-a korisnika
+  };
+
+  const handleLogout = () => {
+    setIdKorisnika(null); // Postavljanje ID-a korisnika na null prilikom odjave
+  };
 
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/prijava" element={<Login onLogin={handleLogin} />} /> {/* Proslijedite handleLogin kao prop */}
-          <Route path="/registracija" element={<Registracija />} />
-          <Route path="/unosPutovanja" element={<UnosPutovanja />} />
-          <Route path="/listaPutovanja" element={<ListaPutovanja />} />
-          <Route
-            path="/informacijeRacuna"
-            element={<InformacijeRacuna idKorisnika={idKorisnika} />} /> {/* Proslijedite idKorisnika kao prop */}
-        </Routes>
-      </Router>
+      <UserContext.Provider value={{ idKorisnika, handleLogin, handleLogout }}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/prijava" element={<Login handleLogin={handleLogin} />} /> {/* Proslijedite handleLogin kao prop */}
+            <Route path="/registracija" element={<Registracija />} />
+            <Route path="/unosPutovanja" element={<UnosPutovanja />} />
+            <Route path="/listaPutovanja" element={<ListaPutovanja />} />
+            <Route
+              path="/informacijeRacuna"
+              element={<InformacijeRacuna />} /> {/* Proslijedite idKorisnika kao prop */}
+          </Routes>
+        </Router>
+      </UserContext.Provider>
     </div>
   );
 }

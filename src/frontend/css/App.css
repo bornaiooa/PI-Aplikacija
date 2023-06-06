@@ -96,14 +96,51 @@ button {
 }
 
 .password-container input {
-  padding-right: 8rem; /* Dodajte dovoljno prostora s desne strane inputa za ikonu */
+  padding-right: 15rem; 
 }
 
 .password-container .eye-icon {
   color: #7439db;
   position: absolute;
   top: 50%;
-  right: 0.75rem; /* Prilagodite vrijednost prema potrebi */
+  right: 0.75rem; 
   transform: translateY(-50%);
   cursor: pointer;
+}
+
+.navigation-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  color: #7439db;
+  padding: 10px;
+  border-radius: 50px;
+}
+
+.nav-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-left a {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-right: 10px;
+  color: #7439db;
+  text-decoration: none;
+}
+
+.nav-left a.active {
+  font-weight: bold;
+  background-color: #f0f0f0;
+  border-radius: 50px;
+}
+
+.nav-right a {
+  padding: 8px 16px;
+  margin-left: 10px;
+  color: black;
+  text-decoration: none;
 }

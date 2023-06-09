@@ -27,6 +27,14 @@ export const UnosPutovanja = () => {
                     >
                         Unos putovanja
                     </Link>
+
+                    <Link
+            to="/izracunPotrosnje"
+            className={location.pathname === "/izracunPotrosnje" ? "active" : ""}
+          >
+            Izračun potrošnje goriva
+          </Link>
+
                     <Link
                         to="/listaPutovanja"
                         className={location.pathname === "/listaPutovanja" ? "active" : ""}

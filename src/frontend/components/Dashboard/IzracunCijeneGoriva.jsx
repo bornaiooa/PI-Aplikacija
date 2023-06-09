@@ -1,0 +1,105 @@
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+
+
+export const IzracunCijeneGoriva = () => {
+    const [kilometri, setKilometri] = useState('');
+    const [cijenaGoriva, setCijenaGoriva] = useState('');
+    const [potrosnjaAuta, setPotrosnjaAuta] = useState('');
+    const [izracun, setIzracun] = useState('');
+    const location = useLocation();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const km = parseFloat(kilometri);
+        const cijena1L = parseFloat(cijenaGoriva);
+        const potrosnjaLkm = parseFloat(potrosnjaAuta);
+    
+        // Provjeri jesu li unesene vrijednosti valjane brojeve
+        if (isNaN(km) || isNaN(cijena1L) || isNaN(potrosnjaLkm)) {
+          return;
+        }
+    
+        const brojLitara = (potrosnjaLkm * km / 100).toFixed(2);
+        const iznosNovca = (brojLitara * cijena1L).toFixed(2);
+    
+        setIzracun(`Za put od ${kilometri} km, potrošiti ćete ${brojLitara} litara goriva, za što ćete vas izdvojiti ${iznosNovca} kn.`);
+    }
+
+    return (
+        <div>
+            <nav className="navigation-bar">
+                <div className="nav-left">
+                    <Link
+                        to="/unosPutovanja"
+                        className={location.pathname === "/unosPutovanja" ? "active" : ""}
+                    >
+                        Unos putovanja
+                    </Link>
+
+                    <Link
+            to="/izracunPotrosnje"
+            className={location.pathname === "/izracunPotrosnje" ? "active" : ""}
+          >
+            Izračun potrošnje goriva
+          </Link>
+
+                    <Link
+                        to="/listaPutovanja"
+                        className={location.pathname === "/listaPutovanja" ? "active" : ""}
+                    >
+                        Lista putovanja
+                    </Link>
+                    <Link
+                        to="/informacijeRacuna"
+                        className={location.pathname === "/informacijeRacuna" ? "active" : ""}
+                    >
+                        Informacije o računu
+                    </Link>
+                </div>
+                <div className="nav-right">
+                    <Link to="/prijava">Odjava</Link>
+                </div>
+            </nav>
+            <div className="putovanje-form-container">
+                <h2 className="header">Izračunavanje prelaska killometara</h2>
+                <form className="putovanje-form" onSubmit={handleSubmit}>
+                  
+                    <label htmlFor="Kilometri">Unesite prijeđeni put u kilometrima</label>
+                    <input
+                        value={kilometri}
+                        name="Kilometri"
+                        onChange={(e) => setKilometri(e.target.value)}
+                        id="Kilometri" />
+
+                    <label htmlFor="CijenaGoriva">Unesite cijenu goriva (u kunama ili eurima/Litri)</label>
+                    <input
+                        value={cijenaGoriva}
+                        name="cijenaGoriva"
+                        onChange={(e) => setCijenaGoriva(e.target.value)}
+                        id="cijenaGoriva" />
+
+                    <label htmlFor="potrosnjaAuta">Unesite prosječnu potrošnju auta na 100km</label>
+                    <input
+                        value={potrosnjaAuta}
+                        onChange={(e) => setPotrosnjaAuta(e.target.value)}
+                        type="number"
+                        id="PotrosnjaAuta"
+                        name="PotrosnjaAuta" />
+
+                
+
+                    <button className="gumb" type="submit">Izračunaj koliko ćeš platiti gorivo za svoj put</button>
+                </form>
+                <div>
+                    <label htmlFor="izracun">Izračun:</label>
+                    <input
+                        value={izracun}
+                        readOnly
+                        id="izracun"
+                        name="izracun" />
+                </div>
+            </div>
+        </div>
+    )
+}

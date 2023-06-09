@@ -68,14 +68,14 @@ export const IzracunKilometara = () => {
                 <form className="putovanje-form" onSubmit={handleSubmit}>
                     
 
-                    <label htmlFor="KolicinaGoriva">Unesite količinu natočenog goriva u (kunama)</label>
+                    <label htmlFor="KolicinaGoriva">Unesite količinu natočenog goriva (u eurima)</label>
                     <input
                         value={kolicinaGoriva}
                         name="KolicinaGoriva"
                         onChange={(e) => setKolicinaGoriva(e.target.value)}
                         id="KolicinaGoriva" />
 
-                    <label htmlFor="CijenaGoriva">Unesite cijenu goriva (u kunama/Litri)</label>
+                    <label htmlFor="CijenaGoriva">Unesite cijenu goriva (u eurima/litri)</label>
                     <input
                         value={cijenaGoriva}
                         name="cijenaGoriva"

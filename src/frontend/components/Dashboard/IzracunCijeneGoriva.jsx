@@ -62,7 +62,7 @@ export const IzracunCijeneGoriva = () => {
                 </div>
             </nav>
             <div className="putovanje-form-container">
-                <h2 className="header">Izračunavanje prelaska killometara</h2>
+                <h2 className="header">Izračunavanje cijene goriva</h2>
                 <form className="putovanje-form" onSubmit={handleSubmit}>
                   
                     <label htmlFor="Kilometri">Unesite prijeđeni put u kilometrima</label>
@@ -72,7 +72,7 @@ export const IzracunCijeneGoriva = () => {
                         onChange={(e) => setKilometri(e.target.value)}
                         id="Kilometri" />
 
-                    <label htmlFor="CijenaGoriva">Unesite cijenu goriva (u kunama ili eurima/Litri)</label>
+                    <label htmlFor="CijenaGoriva">Unesite cijenu goriva (u eurima/litri)</label>
                     <input
                         value={cijenaGoriva}
                         name="cijenaGoriva"
@@ -92,7 +92,7 @@ export const IzracunCijeneGoriva = () => {
                     <button className="gumb" type="submit">Izračunaj koliko ćeš platiti gorivo za svoj put</button>
                 </form>
                 <div>
-                    <label htmlFor="izracun">Izračun:</label>
+                    <label htmlFor="izracun">Izračun (EUR)</label>
                     <input
                         value={izracun}
                         readOnly

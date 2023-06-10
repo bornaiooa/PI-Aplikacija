@@ -100,7 +100,7 @@ export const InformacijeRacuna = () => {
             to="/izracunPotrosnje"
             className={location.pathname === "/izracunPotrosnje" ? "active" : ""}
           >
-            Izračun potrošnje goriva
+            Kalkulator
           </Link>
 
           <Link

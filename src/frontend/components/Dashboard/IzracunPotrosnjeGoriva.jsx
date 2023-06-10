@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-
-export const IzracunKilometara = () => {
+export const IzracunPotrosnjeGoriva = () => {
     const [kolicinaGoriva, setKolicinaGoriva] = useState('');
     const [cijenaGoriva, setCijenaGoriva] = useState('');
     const [brojKilometara, setBrojKilometara] = useState('');
     const [izracun, setIzracun] = useState('');
     const location = useLocation();
+    const navigate=useNavigate();
 
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         const litaraGoriva = parseFloat(kolicinaGoriva);
@@ -26,6 +28,9 @@ export const IzracunKilometara = () => {
         setIzracun(`Vaš automobil troši ${potrosnjaLkm} litara goriva na 100 km. Gorivo će vas koštati ${iznosNovca} kn.`);
       }
 
+      const handleIzracunPotrosnje= () => {
+        navigate('/izracunPotrosnje');
+    }
 
     return (
         <div>
@@ -63,7 +68,7 @@ export const IzracunKilometara = () => {
                 </div>
             </nav>
             <div className="putovanje-form-container">
-                <h2 className="header">Izračunavanje prelaska killometara</h2>
+                <h2 className="header">Izračunavanje potrošnje goriva</h2>
                 <form className="putovanje-form" onSubmit={handleSubmit}>
                     
 
@@ -85,22 +90,24 @@ export const IzracunKilometara = () => {
                     <input
                         value={brojKilometara}
                         onChange={(e) => setBrojKilometara(e.target.value)}
-                        type="number"
+                        
                         id="BrojKilometara"
                         name="BrojKilometara" />
 
                 
 
-                    <button className="gumb" type="submit">Izračunaj koliko ćeš kilometara prijeći</button>
+                    <button className="gumb" type="submit">Izračunaj koliko ćeš potrošiti goriva i koliko ćete koštati</button>
                 </form>
                 <div>
-                    <label htmlFor="izracun">Izračun (km):</label>
-                    <input
-                        value={izracun}
+                    <label htmlFor="izracun">Izračun potrošnje:</label>
+                    <input className="polje"
+                        value ={izracun}
                         readOnly
                         id="izracun"
                         name="izracun" />
                 </div>
+
+                <button className="gumb" onClick={handleIzracunPotrosnje}>Povratak na stranicu Kalkulator</button>
             </div>
         </div>
     )

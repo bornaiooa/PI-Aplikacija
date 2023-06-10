@@ -32,7 +32,7 @@ export const UnosPutovanja = () => {
             to="/izracunPotrosnje"
             className={location.pathname === "/izracunPotrosnje" ? "active" : ""}
           >
-            Izračun potrošnje goriva
+            Kalkulator
           </Link>
 
                     <Link

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 
 export const IzracunCijeneGoriva = () => {
     const [kilometri, setKilometri] = useState('');
@@ -8,6 +8,7 @@ export const IzracunCijeneGoriva = () => {
     const [potrosnjaAuta, setPotrosnjaAuta] = useState('');
     const [izracun, setIzracun] = useState('');
     const location = useLocation();
+    const navigate=useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,6 +27,10 @@ export const IzracunCijeneGoriva = () => {
         setIzracun(`Za put od ${kilometri} km, potrošiti ćete ${brojLitara} litara goriva, za što ćete vas izdvojiti ${iznosNovca} kn.`);
     }
 
+    const handleIzracunPotrosnje= () => {
+        navigate('/izracunPotrosnje');
+    }
+
     return (
         <div>
             <nav className="navigation-bar">
@@ -41,7 +46,7 @@ export const IzracunCijeneGoriva = () => {
             to="/izracunPotrosnje"
             className={location.pathname === "/izracunPotrosnje" ? "active" : ""}
           >
-            Izračun potrošnje goriva
+            Kalkulator
           </Link>
 
                     <Link
@@ -93,12 +98,13 @@ export const IzracunCijeneGoriva = () => {
                 </form>
                 <div>
                     <label htmlFor="izracun">Izračun (EUR)</label>
-                    <input
+                    <input className="polje"
                         value={izracun}
                         readOnly
                         id="izracun"
                         name="izracun" />
                 </div>
+                <button className="gumb" onClick={handleIzracunPotrosnje}>Povratak na stranicu Kalkulator</button>
             </div>
         </div>
     )

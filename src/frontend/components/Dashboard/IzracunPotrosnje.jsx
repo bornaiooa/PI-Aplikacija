@@ -35,7 +35,7 @@ export const IzracunPotrosnje = (props) => {
             to="/izracunPotrosnje"
             className={location.pathname === "/izracunPotrosnje" ? "active" : ""}
           >
-            Izračun potrošnje goriva
+            Kalkulator
           </Link>
 
           <Link

@@ -40,6 +40,12 @@ label {
   
 }
 
+.polje{
+
+width: 90%;
+padding-bottom: 20px;
+}
+
 
 input,
 select {

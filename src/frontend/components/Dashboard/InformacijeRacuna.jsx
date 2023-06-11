@@ -85,6 +85,28 @@ export const InformacijeRacuna = () => {
     }
   };
 
+  const handleDeleteAccount = () => {
+    if (window.confirm("Jeste li sigurni da želite izbrisati svoj račun?")) {
+      axios
+        .delete("http://localhost:3001/brisanjeRacuna", {
+          data: { idKorisnika: idKorisnika },
+        })
+        .then((response) => {
+          console.log(response.data);
+          // Očistite podatke i izvršite bilo koju drugu akciju koju želite nakon brisanja računa
+          setEmail("");
+          setName("");
+          setLastname("");
+          setUsername("");
+          setPassword("");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
+  
+
   return (
     <div>
       <nav className="navigation-bar">
@@ -193,6 +215,11 @@ export const InformacijeRacuna = () => {
             Uredi informacije
           </button>
         )}
+
+<button className="gumb" onClick={handleDeleteAccount}>
+  Izbriši račun
+</button>
+
       </div>
     </div>
   );

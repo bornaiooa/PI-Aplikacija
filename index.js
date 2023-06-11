@@ -106,6 +106,26 @@ app.post("/azurirajRacun", (req, res) => {
     );
 });
 
+
+app.delete("/brisanjeRacuna", (req, res) => {
+    const idKorisnika = req.body.idKorisnika; // ID korisnika koji je prijavljen
+    const { name, lastname, email, username, password } = req.body;
+
+    
+    db.query(
+        "DELETE FROM Korisnik ID_korisnika= ?, Ime_korisnika = ?, Prezime_korisnika = ?, Email_korisnika = ?, Korisnicko_ime = ?, Lozinka = ? WHERE ID_korisnika = ?"
+        [name, lastname, email, username, password, idKorisnika],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                res.send({ message: "Račun!" });
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
 app.post("/unosPutovanja", (req, res) => {
     const datumPutovanja = req.body.datumPutovanja;
     const mjestoPolaska = req.body.mjestoPolaska;

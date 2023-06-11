@@ -11,24 +11,24 @@ export const IzracunKilometara = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-      e.preventDefault();
-      const placenoGorivo = parseFloat(kolicinaGoriva);
-      const cijena1L = parseFloat(cijenaGoriva);
-      const potrosnjaLkm = parseFloat(potrosnjaAuta);
-     
-      // Provjeri jesu li unesene vrijednosti valjane brojeve
-      if (isNaN(placenoGorivo) || isNaN(cijena1L) || isNaN(potrosnjaLkm)) {
-        return;
-      }
-      
-      const kilometri = (placenoGorivo / (potrosnjaLkm / 10)).toFixed(2);
-      const brojLitara=  (placenoGorivo/ cijena1L).toFixed(2);
-      
-  
-      setIzracun(`Možete prijeći ${kilometri} km za ${brojLitara} natočenih litara!`);
+        e.preventDefault();
+        const placenoGorivo = parseFloat(kolicinaGoriva);
+        const cijena1L = parseFloat(cijenaGoriva);
+        const potrosnjaLkm = parseFloat(potrosnjaAuta);
+
+        // Provjeri jesu li unesene vrijednosti valjane brojeve
+        if (isNaN(placenoGorivo) || isNaN(cijena1L) || isNaN(potrosnjaLkm)) {
+            return;
+        }
+
+        const kilometri = (placenoGorivo / (potrosnjaLkm / 10)).toFixed(2);
+        const brojLitara = (placenoGorivo / cijena1L).toFixed(2);
+
+
+        setIzracun(`Možete prijeći ${kilometri} km za ${brojLitara} natočenih litara!`);
     }
 
-    const handleIzracunPotrosnje= () => {
+    const handleIzracunPotrosnje = () => {
         navigate('/izracunPotrosnje');
     }
     return (
@@ -43,11 +43,11 @@ export const IzracunKilometara = () => {
                     </Link>
 
                     <Link
-            to="/izracunPotrosnje"
-            className={location.pathname === "/izracunPotrosnje" ? "active" : ""}
-          >
-            Kalkulator
-          </Link>
+                        to="/izracunPotrosnje"
+                        className={location.pathname === "/izracunPotrosnje" ? "active" : ""}
+                    >
+                        Kalkulator
+                    </Link>
 
                     <Link
                         to="/listaPutovanja"
@@ -69,7 +69,7 @@ export const IzracunKilometara = () => {
             <div className="putovanje-form-container">
                 <h2 className="header">Izračunavanje kilometara koji će se prijeći</h2>
                 <form className="putovanje-form" onSubmit={handleSubmit}>
-                    
+
 
                     <label htmlFor="KolicinaGoriva">Unesite količinu natočenog goriva (u eurima)</label>
                     <input
@@ -93,7 +93,7 @@ export const IzracunKilometara = () => {
                         id="PotrosnjaAuta"
                         name="PotrosnjaAuta" />
 
-                
+
 
                     <button className="gumb" type="submit">Izračunaj koliko ćeš kilometara prijeći</button>
                 </form>
@@ -109,7 +109,7 @@ export const IzracunKilometara = () => {
                 <button className="gumb" onClick={handleIzracunPotrosnje}>Povratak na stranicu Kalkulator</button>
             </div>
 
-            
+
         </div>
     )
 }

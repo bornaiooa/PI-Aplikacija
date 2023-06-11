@@ -1,8 +1,8 @@
-import React, { useState } from "react"; 
-import { useNavigate } from 'react-router-dom'; 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; 
-import { faEye } from "@fortawesome/free-solid-svg-icons"; 
-import Axios from "axios"; 
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import Axios from "axios";
 
 export const Registracija = (props) => {
     const navigate = useNavigate(); // Korištenje useNavigate kuke za navigaciju
@@ -13,7 +13,7 @@ export const Registracija = (props) => {
     const [lastname, setLastname] = useState(''); // Korištenje useState kuke za praćenje unosa prezimena
     const [username, setUsername] = useState(''); // Korištenje useState kuke za praćenje unosa korisničkog imena
     const [registerStatus, setRegisterStatus] = useState(""); // Korištenje useState kuke za praćenje statusa registracije
-    
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword); // Funkcija za promjenu stanja prikazivanja/skrivanja lozinke
     };
@@ -35,10 +35,6 @@ export const Registracija = (props) => {
                 navigate('/prijava'); // Navigacija na "/prijava" rutu
             }
         })
-    }
-
-    const handlePrijava = () => {
-        navigate('/prijava'); // Navigacija na "/prijava" rutu
     }
 
     return (
@@ -95,10 +91,10 @@ export const Registracija = (props) => {
                     </div>
                 </div>
 
-                <button className="gumb" type="submit" onClick={register}>Registriraj se</button> 
-                <h1 style={{ color: 'red', fontSize: '15px', textAlign: 'center', marginTop: '20px' }}>{registerStatus}</h1> 
+                <button className="gumb" type="submit" onClick={register}>Registriraj se</button>
+                <h1 style={{ color: 'red', fontSize: '15px', textAlign: 'center', marginTop: '20px' }}>{registerStatus}</h1>
             </form>
-            {<button className="link-btn" onClick={handlePrijava}>Već imate račun? Prijavite se ovdje.</button>} 
+            {<button className="link-btn">Već imate račun? Prijavite se ovdje.</button>}
         </div>
     )
 }

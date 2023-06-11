@@ -106,6 +106,30 @@ app.post("/azurirajRacun", (req, res) => {
     );
 });
 
+app.post("/unosPutovanja", (req, res) => {
+    const datumPutovanja = req.body.datumPutovanja;
+    const mjestoPolaska = req.body.mjestoPolaska;
+    const mjestoDolaska = req.body.mjestoDolaska;
+    const brojKilometara = req.body.brojKilometara;
+    const potrosnjaGoriva = req.body.potrosnjaGoriva;
+    const idKorisnika = req.body.idKorisnika;
+    const idVozila = req.body.idVozila;
+  
+    // Dodavanje novog putovanja u tablicu Putovanje
+    db.query(
+      "INSERT INTO Putovanje (Datum_putovanja, Mjesto_polaska, Mjesto_dolaska, Broj_kilometara, Potrosnja_goriva, ID_korisnika, ID_vozila) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [datumPutovanja, mjestoPolaska, mjestoDolaska, brojKilometara, potrosnjaGoriva, idKorisnika, idVozila],
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          res.send({ message: "Greška pri unosu putovanja!" });
+        } else {
+          res.send(result);
+        }
+      }
+    );
+  });
+
 app.get("/listaPutovanja", (req, res) => {
     // Dohvaćanje svih putovanja iz tablice Putovanje
     db.query("SELECT * FROM Putovanje", (err, result) => {

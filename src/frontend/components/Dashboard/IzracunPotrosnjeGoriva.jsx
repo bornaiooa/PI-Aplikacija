@@ -8,27 +8,27 @@ export const IzracunPotrosnjeGoriva = () => {
     const [brojKilometara, setBrojKilometara] = useState('');
     const [izracun, setIzracun] = useState('');
     const location = useLocation();
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const litaraGoriva = parseFloat(kolicinaGoriva);
         const cijena1L = parseFloat(cijenaGoriva);
         const kilometri = parseFloat(brojKilometara);
-    
+
         // Provjeri jesu li unesene vrijednosti valjane brojeve
         if (isNaN(litaraGoriva) || isNaN(cijena1L) || isNaN(kilometri)) {
-          return;
+            return;
         }
-    
+
         const potrosnjaLkm = (litaraGoriva / (kilometri / 100)).toFixed(2);
         const iznosNovca = (litaraGoriva * cijena1L).toFixed(2);
-    
-        setIzracun(`Vaš automobil troši ${potrosnjaLkm} litara goriva na 100 km. Gorivo će vas koštati ${iznosNovca} kn.`);
-      }
 
-      const handleIzracunPotrosnje= () => {
+        setIzracun(`Vaš automobil troši ${potrosnjaLkm} litara goriva na 100 km. Gorivo će vas koštati ${iznosNovca} kn.`);
+    }
+
+    const handleIzracunPotrosnje = () => {
         navigate('/izracunPotrosnje');
     }
 
@@ -44,11 +44,11 @@ export const IzracunPotrosnjeGoriva = () => {
                     </Link>
 
                     <Link
-            to="/izracunPotrosnje"
-            className={location.pathname === "/izracunPotrosnje" ? "active" : ""}
-          >
-            Izračun potrošnje goriva
-          </Link>
+                        to="/izracunPotrosnje"
+                        className={location.pathname === "/izracunPotrosnje" ? "active" : ""}
+                    >
+                        Izračun potrošnje goriva
+                    </Link>
 
                     <Link
                         to="/listaPutovanja"
@@ -70,7 +70,7 @@ export const IzracunPotrosnjeGoriva = () => {
             <div className="putovanje-form-container">
                 <h2 className="header">Izračunavanje potrošnje goriva</h2>
                 <form className="putovanje-form" onSubmit={handleSubmit}>
-                    
+
 
                     <label htmlFor="KolicinaGoriva">Unesite količinu natočenog goriva u (litrama)</label>
                     <input
@@ -90,18 +90,18 @@ export const IzracunPotrosnjeGoriva = () => {
                     <input
                         value={brojKilometara}
                         onChange={(e) => setBrojKilometara(e.target.value)}
-                        
+
                         id="BrojKilometara"
                         name="BrojKilometara" />
 
-                
 
-                    <button className="gumb" type="submit">Izračunaj koliko ćeš potrošiti goriva i koliko ćete koštati</button>
+
+                    <button className="gumb" type="submit">Izračunaj koliko ćete potrošiti goriva i koliko će te koštati</button>
                 </form>
                 <div>
                     <label htmlFor="izracun">Izračun potrošnje:</label>
                     <input className="polje"
-                        value ={izracun}
+                        value={izracun}
                         readOnly
                         id="izracun"
                         name="izracun" />

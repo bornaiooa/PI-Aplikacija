@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
+import { UserContext } from "../../../App";
 
 export const ListaPutovanja = () => {
   const [putovanja, setPutovanja] = useState([]);
   const location = useLocation();
+  const { idKorisnika } = useContext(UserContext); // Dohvati ID prijavljenog korisnika
 
   const dohvatiPutovanja = () => {
-    // Dohvaćanje prošlih putovanja iz liste putovanja
-    axios.get("http://localhost:3001/listaPutovanja")
+    // Dohvaćanje putovanja samo za prijavljenog korisnika
+    axios.get("http://localhost:3001/listaPutovanja", {
+      params: { idKorisnika: idKorisnika },
+    })
       .then((response) => {
         if (Array.isArray(response.data)) {
-          setPutovanja(response.data); // Postavi dobivena putovanja u state
+          setPutovanja(response.data);
         } else {
-          console.error(response.data); // Ispiši grešku ako podaci nisu u očekivanom formatu
+          console.error(response.data);
         }
       })
       .catch((error) => {
-        console.error(error); // Ispiši grešku ako dođe do problema prilikom dohvata putovanja
+        console.error(error);
       });
   };
 
@@ -75,7 +79,8 @@ export const ListaPutovanja = () => {
               <th>Mjesto polaska</th>
               <th>Mjesto dolaska</th>
               <th>Vrsta vozila</th>
-              <th>Trošak (€)</th>
+              <th>Broj kilometara</th>
+              <th>Potrošnja goriva</th>
             </tr>
           </thead>
           <tbody>
@@ -85,7 +90,8 @@ export const ListaPutovanja = () => {
                 <td>{putovanje.Mjesto_polaska}</td>
                 <td>{putovanje.Mjesto_dolaska}</td>
                 <td>{putovanje.ID_vozila}</td>
-                <td>{putovanje.Prosjecna_potrosnja}</td>
+                <td>{putovanje.Broj_kilometara}</td>
+                <td>{putovanje.Potrosnja_goriva}</td>
               </tr>
             ))}
           </tbody>

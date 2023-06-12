@@ -85,7 +85,7 @@ export const IzracunPotrosnjeGoriva = () => {
                     
                     
 
-                    <button className="gumb" type="submit">Izračunaj koliko ćete potrošiti goriva i koliko će te koštati</button>
+                    <button className="gumb" type="submit">Izračunaj koliko ćeš prijeći kilometara</button>
                 </form>
                 <div>
                     <label htmlFor="izracun">Izračun potrošnje:</label>

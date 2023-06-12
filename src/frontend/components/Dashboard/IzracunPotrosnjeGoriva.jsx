@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const IzracunPotrosnjeGoriva = () => {
     const [kolicinaGoriva, setKolicinaGoriva] = useState('');
-    const [cijenaGoriva, setCijenaGoriva] = useState('');
-    const [brojKilometara, setBrojKilometara] = useState('');
+    const [potrosnjaAuta, setpotrosnjaAuta] = useState('');
     const [izracun, setIzracun] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
@@ -14,20 +13,17 @@ export const IzracunPotrosnjeGoriva = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const litaraGoriva = parseFloat(kolicinaGoriva);
-        const cijena1L = parseFloat(cijenaGoriva);
-        const kilometri = parseFloat(brojKilometara);
-
-        // Provjeri jesu li unesene vrijednosti valjane brojeve
-        if (isNaN(litaraGoriva) || isNaN(cijena1L) || isNaN(kilometri)) {
-            return;
+        const prosjecnapotrosnjaAuta = parseFloat(potrosnjaAuta);
+    
+        // Provjeri jesu li unesene vrijednosti valjani brojevi
+        if (isNaN(litaraGoriva) || isNaN(prosjecnapotrosnjaAuta)) {
+          return;
         }
-
-        const potrosnjaLkm = (litaraGoriva / (kilometri / 100)).toFixed(2);
-        const iznosNovca = (litaraGoriva * cijena1L).toFixed(2);
-
-        setIzracun(`Vaš automobil troši ${potrosnjaLkm} litara goriva na 100 km. Gorivo će vas koštati ${iznosNovca} kn.`);
-    }
-
+    
+        const prelazakKilometara = litaraGoriva / (prosjecnapotrosnjaAuta / 100);
+        setIzracun(`Za natočeno gorivo prijeći ćeš: ${prelazakKilometara.toFixed(2)} km.`);
+      }
+    
     const handleIzracunPotrosnje = () => {
         navigate('/izracunPotrosnje');
     }
@@ -79,22 +75,15 @@ export const IzracunPotrosnjeGoriva = () => {
                         onChange={(e) => setKolicinaGoriva(e.target.value)}
                         id="KolicinaGoriva" />
 
-                    <label htmlFor="CijenaGoriva">Unesite cijenu goriva (u kunama/Litri)</label>
+                    <label htmlFor="CijenaGoriva">Unesite prosječnu potrošnju goriva (Litara/100km)</label>
                     <input
-                        value={cijenaGoriva}
-                        name="CijenaGoriva"
-                        onChange={(e) => setCijenaGoriva(e.target.value)}
-                        id="CijenaGoriva" />
+                        value={potrosnjaAuta}
+                        name="potrosnjaAuta"
+                        onChange={(e) => setpotrosnjaAuta(e.target.value)}
+                        id="potrosnjaAutaa" />
 
-                    <label htmlFor="BrojKilometara">Unesite koliko ste kilometražu (koliki put ćete prijeći)</label>
-                    <input
-                        value={brojKilometara}
-                        onChange={(e) => setBrojKilometara(e.target.value)}
-
-                        id="BrojKilometara"
-                        name="BrojKilometara" />
-
-
+                    
+                    
 
                     <button className="gumb" type="submit">Izračunaj koliko ćete potrošiti goriva i koliko će te koštati</button>
                 </form>

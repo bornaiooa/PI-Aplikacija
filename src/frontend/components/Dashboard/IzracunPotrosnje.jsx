@@ -14,7 +14,7 @@ export const IzracunPotrosnje = (props) => {
     navigate('/izracunCijeneGoriva');
   }
 
-  const handleIzracunPotrosnjeGoriva = () => {
+  const handleIzracunPrelaskaKilometrimaPoLitrama = () => {
     navigate('/izracunPotrosnjeGoriva');
   }
 
@@ -63,7 +63,7 @@ export const IzracunPotrosnje = (props) => {
         <br />
         <button className="gumb" onClick={handleIzracunCijeneGoriva}>Izračun cijene goriva za određenu kilometražu</button>
         <br />
-        <button className="gumb" onClick={handleIzracunPotrosnjeGoriva}>Izračun potrošnje goriva</button>
+        <button className="gumb" onClick={handleIzracunPrelaskaKilometrimaPoLitrama}>Izračun prijeđenih kilometara za natočeno gorivo</button>
 
       </div>
 

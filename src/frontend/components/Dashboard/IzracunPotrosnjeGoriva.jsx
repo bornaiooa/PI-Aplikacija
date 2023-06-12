@@ -64,7 +64,7 @@ export const IzracunPotrosnjeGoriva = () => {
                 </div>
             </nav>
             <div className="putovanje-form-container">
-                <h2 className="header">Izračunavanje potrošnje goriva</h2>
+                <h2 className="header">Izračunavanje prijeđenih kilometara</h2>
                 <form className="putovanje-form" onSubmit={handleSubmit}>
 
 
@@ -88,7 +88,7 @@ export const IzracunPotrosnjeGoriva = () => {
                     <button className="gumb" type="submit">Izračunaj koliko ćeš prijeći kilometara</button>
                 </form>
                 <div>
-                    <label htmlFor="izracun">Izračun potrošnje:</label>
+                    <label htmlFor="izracun">Izračun prijeđenih kilometara (km):</label>
                     <input className="polje"
                         value={izracun}
                         readOnly

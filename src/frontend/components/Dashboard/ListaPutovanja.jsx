@@ -5,6 +5,7 @@ import { UserContext } from "../../../App";
 
 export const ListaPutovanja = () => {
   const [putovanja, setPutovanja] = useState([]);
+  const [nemaPutovanja, setNemaPutovanja] = useState(false); // Dodan state za provjeru prazne tablice
   const location = useLocation();
   const { idKorisnika } = useContext(UserContext); // Dohvati ID prijavljenog korisnika
 
@@ -16,6 +17,7 @@ export const ListaPutovanja = () => {
       .then((response) => {
         if (Array.isArray(response.data)) {
           setPutovanja(response.data);
+          setNemaPutovanja(response.data.length === 0); // Provjera prazne tablice
         } else {
           console.error(response.data);
         }
@@ -72,30 +74,40 @@ export const ListaPutovanja = () => {
 
       <div className="pregled-putovanja-container">
         <h2 className="header">PREGLED PUTOVANJA</h2>
-        <table className="putovanja-table">
-          <thead>
-            <tr>
-              <th>Datum putovanja</th>
-              <th>Mjesto polaska</th>
-              <th>Mjesto dolaska</th>
-              <th>Vrsta vozila</th>
-              <th>Broj kilometara</th>
-              <th>Potrošnja goriva</th>
-            </tr>
-          </thead>
-          <tbody>
-            {putovanja.map((putovanje) => (
-              <tr key={putovanje.ID_putovanja}>
-                <td>{formatirajDatum(putovanje.Datum_putovanja)}</td>
-                <td>{putovanje.Mjesto_polaska}</td>
-                <td>{putovanje.Mjesto_dolaska}</td>
-                <td>{putovanje.ID_vozila === 1 ? "Automobil" : putovanje.ID_vozila === 2 ? "Motocikl" : ""}</td>
-                <td>{putovanje.Broj_kilometara}</td>
-                <td>{putovanje.Potrosnja_goriva}</td>
+        {nemaPutovanja ? (
+          <p>Nemate nijedno uneseno putovanje.</p> // Alert ako nema putovanja
+        ) : (
+          <table className="putovanja-table">
+            <thead>
+              <tr>
+                <th>Datum putovanja</th>
+                <th>Mjesto polaska</th>
+                <th>Mjesto dolaska</th>
+                <th>Vrsta vozila</th>
+                <th>Broj kilometara</th>
+                <th>Potrošnja goriva</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {putovanja.map((putovanje) => (
+                <tr key={putovanje.ID_putovanja}>
+                  <td>{formatirajDatum(putovanje.Datum_putovanja)}</td>
+                  <td>{putovanje.Mjesto_polaska}</td>
+                  <td>{putovanje.Mjesto_dolaska}</td>
+                  <td>
+                    {putovanje.ID_vozila === 1
+                      ? "Automobil"
+                      : putovanje.ID_vozila === 2
+                        ? "Motocikl"
+                        : ""}
+                  </td>
+                  <td>{putovanje.Broj_kilometara}</td>
+                  <td>{putovanje.Potrosnja_goriva}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
         <button className="gumb" onClick={dohvatiPutovanja}>
           Dohvati prošla putovanja
         </button>

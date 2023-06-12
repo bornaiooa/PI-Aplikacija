@@ -109,16 +109,14 @@ app.post("/azurirajRacun", (req, res) => {
 
 app.delete("/brisanjeRacuna", (req, res) => {
     const idKorisnika = req.body.idKorisnika; // ID korisnika koji je prijavljen
-    const { name, lastname, email, username, password } = req.body;
 
-    
     db.query(
-        "DELETE FROM Korisnik ID_korisnika= ?, Ime_korisnika = ?, Prezime_korisnika = ?, Email_korisnika = ?, Korisnicko_ime = ?, Lozinka = ? WHERE ID_korisnika = ?"
-        [name, lastname, email, username, password, idKorisnika],
+        "DELETE FROM Korisnik WHERE ID_korisnika = ?",
+        [idKorisnika],
         (err, result) => {
             if (err) {
                 console.error(err);
-                res.send({ message: "Račun!" });
+                res.send({ message: err });
             } else {
                 res.send(result);
             }
@@ -134,33 +132,38 @@ app.post("/unosPutovanja", (req, res) => {
     const potrosnjaGoriva = req.body.potrosnjaGoriva;
     const idKorisnika = req.body.idKorisnika;
     const idVozila = req.body.idVozila;
-  
+
     // Dodavanje novog putovanja u tablicu Putovanje
     db.query(
-      "INSERT INTO Putovanje (Datum_putovanja, Mjesto_polaska, Mjesto_dolaska, Broj_kilometara, Potrosnja_goriva, ID_korisnika, ID_vozila) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [datumPutovanja, mjestoPolaska, mjestoDolaska, brojKilometara, potrosnjaGoriva, idKorisnika, idVozila],
-      (err, result) => {
-        if (err) {
-          console.error(err);
-          res.send({ message: "Greška pri unosu putovanja!" });
-        } else {
-          res.send(result);
+        "INSERT INTO Putovanje (Datum_putovanja, Mjesto_polaska, Mjesto_dolaska, Broj_kilometara, Potrosnja_goriva, ID_korisnika, ID_vozila) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [datumPutovanja, mjestoPolaska, mjestoDolaska, brojKilometara, potrosnjaGoriva, idKorisnika, idVozila],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                res.send({ message: "Greška pri unosu putovanja!" });
+            } else {
+                res.send(result);
+            }
         }
-      }
     );
-  });
+});
 
 app.get("/listaPutovanja", (req, res) => {
-    // Dohvaćanje svih putovanja iz tablice Putovanje
-    db.query("SELECT * FROM Putovanje", (err, result) => {
-        if (err) {
-            console.error(err);
-            res.send({ message: "Greška pri dohvaćanju putovanja" });
-        } else {
-            res.send(result);
+    const idKorisnika = req.query.idKorisnika;
+
+    db.query(
+        "SELECT * FROM Putovanje WHERE ID_korisnika = ?", [idKorisnika], (err, result) => {
+            if (err) {
+                console.error(err);
+                res.send({ message: "Greška pri dohvaćanju putovanja" });
+            } else {
+                res.send(result);
+            }
         }
-    });
+    );
 });
+
+
 
 app.listen(3001, () => {
     console.log("Pokretanje backenda");

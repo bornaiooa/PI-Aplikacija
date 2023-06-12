@@ -25,7 +25,7 @@
 
   .auth-form-container,
   .putovanje-form-container,
-  .pregled-putovanja-container{
+  .pregled-putovanja-container {
     padding: 5rem;
     padding-top: 10px;
     border: 2px solid white;
@@ -37,15 +37,13 @@
 label {
   text-align: left;
   padding: 0.2rem;
-  
+
 }
 
-.polje{
-
-width: 90%;
-padding-bottom: 20px;
+.polje {
+  width: 90%;
+  padding-bottom: 20px;
 }
-
 
 input,
 select {
@@ -57,7 +55,7 @@ select {
 
 button {
   border: none;
-  background-color: white;
+  background-color: #e0e0e0;
   padding: 20px;
   border-radius: 10px;
   cursor: pointer;
@@ -93,6 +91,7 @@ button {
   padding: 10px;
   text-align: left;
   border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .putovanja-table th {
@@ -104,14 +103,14 @@ button {
 }
 
 .password-container input {
-  padding-right: 22rem; 
+  padding-right: 22rem;
 }
 
 .password-container .eye-icon {
   color: #7439db;
   position: absolute;
   top: 50%;
-  right: 0.75rem; 
+  right: 0.75rem;
   transform: translateY(-50%);
   cursor: pointer;
 }

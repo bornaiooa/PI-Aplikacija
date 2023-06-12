@@ -4,8 +4,10 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../../../App";
+import { useNavigate } from 'react-router-dom';
 
 export const InformacijeRacuna = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
@@ -45,17 +47,17 @@ export const InformacijeRacuna = () => {
   const handleSaveClick = () => {
     setIsEditing(false);
 
-    axios
-      .post("http://localhost:3001/azurirajRacun", {
-        idKorisnika: idKorisnika,
-        name: name,
-        lastname: lastname,
-        email: email,
-        username: username,
-        password: password,
-      })
+    axios.post("http://localhost:3001/azurirajRacun", {
+      idKorisnika: idKorisnika,
+      name: name,
+      lastname: lastname,
+      email: email,
+      username: username,
+      password: password,
+    })
       .then((response) => {
         console.log(response.data);
+        alert("Vaše izmjene su uspješno spremljene!");
       })
       .catch((error) => {
         console.error(error);
@@ -87,25 +89,20 @@ export const InformacijeRacuna = () => {
 
   const handleDeleteAccount = () => {
     if (window.confirm("Jeste li sigurni da želite izbrisati svoj račun?")) {
-      axios
-        .delete("http://localhost:3001/brisanjeRacuna", {
-          data: { idKorisnika: idKorisnika },
-        })
+      axios.delete("http://localhost:3001/brisanjeRacuna", {
+        data: { idKorisnika: idKorisnika },
+      })
         .then((response) => {
           console.log(response.data);
-          // Očistite podatke i izvršite bilo koju drugu akciju koju želite nakon brisanja računa
-          setEmail("");
-          setName("");
-          setLastname("");
-          setUsername("");
-          setPassword("");
+          alert("Vaš račun je uspješno obisan!");
+          navigate('/');
         })
         .catch((error) => {
           console.error(error);
         });
     }
   };
-  
+
 
   return (
     <div>
@@ -129,7 +126,7 @@ export const InformacijeRacuna = () => {
             to="/listaPutovanja"
             className={location.pathname === "/listaPutovanja" ? "active" : ""}
           >
-            Lista putovanja
+            Pregled putovanja
           </Link>
           <Link
             to="/informacijeRacuna"
@@ -139,12 +136,12 @@ export const InformacijeRacuna = () => {
           </Link>
         </div>
         <div className="nav-right">
-          <Link to="/prijava">Odjava</Link>
+          <Link to="/">Odjava</Link>
         </div>
       </nav>
 
       <div className="auth-form-container">
-        <h2 className="header">Prikaz informacija o računu</h2>
+        <h2 className="header">PRIKAZ INFORMACIJA O RAČUNU</h2>
         <form className="register-form">
           <label htmlFor="name">Ime</label>
           <input
@@ -212,13 +209,13 @@ export const InformacijeRacuna = () => {
           </div>
         ) : (
           <button className="gumb" onClick={handleEditClick}>
-            Uredi informacije
+            Klikni za početak uređivanja informacija
           </button>
         )}
 
-<button className="gumb" onClick={handleDeleteAccount}>
-  Izbriši račun
-</button>
+        <button className="gumb" onClick={handleDeleteAccount}>
+          Izbriši račun
+        </button>
 
       </div>
     </div>

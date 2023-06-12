@@ -9,10 +9,10 @@ export const ListaPutovanja = () => {
   const { idKorisnika } = useContext(UserContext); // Dohvati ID prijavljenog korisnika
 
   const dohvatiPutovanja = () => {
-    // Dohvaćanje putovanja samo za prijavljenog korisnika
-    axios.get("http://localhost:3001/listaPutovanja", {
-      params: { idKorisnika: idKorisnika },
-    })
+    axios
+      .get("http://localhost:3001/listaPutovanja", {
+        params: { idKorisnika: idKorisnika },
+      })
       .then((response) => {
         if (Array.isArray(response.data)) {
           setPutovanja(response.data);
@@ -56,7 +56,7 @@ export const ListaPutovanja = () => {
             to="/listaPutovanja"
             className={location.pathname === "/listaPutovanja" ? "active" : ""}
           >
-            Lista putovanja
+            Pregled putovanja
           </Link>
           <Link
             to="/informacijeRacuna"
@@ -66,12 +66,12 @@ export const ListaPutovanja = () => {
           </Link>
         </div>
         <div className="nav-right">
-          <Link to="/prijava">Odjava</Link>
+          <Link to="/">Odjava</Link>
         </div>
       </nav>
 
       <div className="pregled-putovanja-container">
-        <h2 className="header">Pregled putovanja</h2>
+        <h2 className="header">PREGLED PUTOVANJA</h2>
         <table className="putovanja-table">
           <thead>
             <tr>
@@ -89,7 +89,7 @@ export const ListaPutovanja = () => {
                 <td>{formatirajDatum(putovanje.Datum_putovanja)}</td>
                 <td>{putovanje.Mjesto_polaska}</td>
                 <td>{putovanje.Mjesto_dolaska}</td>
-                <td>{putovanje.ID_vozila}</td>
+                <td>{putovanje.ID_vozila === 1 ? "Automobil" : putovanje.ID_vozila === 2 ? "Motocikl" : ""}</td>
                 <td>{putovanje.Broj_kilometara}</td>
                 <td>{putovanje.Potrosnja_goriva}</td>
               </tr>

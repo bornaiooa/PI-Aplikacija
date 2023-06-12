@@ -53,7 +53,7 @@ export const IzracunKilometara = () => {
                         to="/listaPutovanja"
                         className={location.pathname === "/listaPutovanja" ? "active" : ""}
                     >
-                        Lista putovanja
+                        Pregled putovanja
                     </Link>
                     <Link
                         to="/informacijeRacuna"
@@ -63,7 +63,7 @@ export const IzracunKilometara = () => {
                     </Link>
                 </div>
                 <div className="nav-right">
-                    <Link to="/prijava">Odjava</Link>
+                    <Link to="/">Odjava</Link>
                 </div>
             </nav>
             <div className="putovanje-form-container">

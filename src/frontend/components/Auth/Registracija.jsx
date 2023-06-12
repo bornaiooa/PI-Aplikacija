@@ -19,22 +19,26 @@ export const Registracija = (props) => {
     };
 
     const register = (e) => {
-        e.preventDefault(); // Sprječavanje podrazumijevane radnje obrasca registracije
-        Axios.post("http://localhost:3001/registracija", { // Slanje POST zahtjeva na određeni URL
-            name: name, // Slanje unesenog imena
-            lastname: lastname, // Slanje unesenog prezimena
-            email: email, // Slanje unesene e-pošte
-            username: username, // Slanje unesenog korisničkog imena
-            password: pass, // Slanje unesene lozinke
+        e.preventDefault();
+        Axios.post("http://localhost:3001/registracija", {
+            name: name,
+            lastname: lastname,
+            email: email,
+            username: username,
+            password: pass,
         }).then((response) => {
-
-            if (response.data.message) { // Provjera odgovora od poslužitelja na temelju poruke
-                setRegisterStatus(response.data.message); // Ažuriranje statusa registracije s porukom odgovora
+            if (response.data.message) {
+                setRegisterStatus(response.data.message);
             } else {
-                setRegisterStatus("Uspješno kreiran račun."); // Ažuriranje statusa registracije s porukom o uspješnoj registraciji
-                navigate('/prijava'); // Navigacija na "/prijava" rutu
+                setRegisterStatus("Uspješno kreiran račun.");
+                alert("Uspješno ste registrirani. Prijavite se!"); // Dodani alert
+                navigate('/prijava');
             }
         })
+    }
+
+    const handlePrijava = () => {
+        navigate('/prijava'); // Navigacija na "/registracija" rutu
     }
 
     return (
@@ -94,7 +98,7 @@ export const Registracija = (props) => {
                 <button className="gumb" type="submit" onClick={register}>Registriraj se</button>
                 <h1 style={{ color: 'red', fontSize: '15px', textAlign: 'center', marginTop: '20px' }}>{registerStatus}</h1>
             </form>
-            {<button className="link-btn">Već imate račun? Prijavite se ovdje.</button>}
+            {<button className="link-btn" onClick={handlePrijava}>Već imate račun? Prijavite se ovdje.</button>}
         </div>
     )
 }

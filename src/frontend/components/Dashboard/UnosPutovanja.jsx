@@ -30,11 +30,22 @@ export const UnosPutovanja = () => {
                 } else {
                     console.log(response.data);
                 }
+                // Prikazivanje prozora s porukom
+                alert('Vaše putovanje je uspješno uneseno.');
+
+                // Resetiranje inputa
+                setMjestoPolaska('');
+                setMjestoDolaska('');
+                setDatumPutovanja('');
+                setBrojKilometara('');
+                setPotrosnjaGoriva('');
+                setIdVozila('');
             })
             .catch((error) => {
                 console.log(error);
             });
     };
+
     return (
         <div>
             <nav className="navigation-bar">
@@ -57,7 +68,7 @@ export const UnosPutovanja = () => {
                         to="/listaPutovanja"
                         className={location.pathname === '/listaPutovanja' ? 'active' : ''}
                     >
-                        Lista putovanja
+                        Pregled putovanja
                     </Link>
                     <Link
                         to="/informacijeRacuna"
@@ -67,11 +78,11 @@ export const UnosPutovanja = () => {
                     </Link>
                 </div>
                 <div className="nav-right">
-                    <Link to="/prijava">Odjava</Link>
+                    <Link to="/">Odjava</Link>
                 </div>
             </nav>
             <div className="putovanje-form-container">
-                <h2 className="header">Unos putovanja</h2>
+                <h2 className="header">UNOS PUTOVANJA</h2>
                 <form className="putovanje-form" onSubmit={unesiPutovanje}>
                     <label htmlFor="datumPutovanja">Odaberite datum putovanja</label>
                     <input
@@ -98,14 +109,17 @@ export const UnosPutovanja = () => {
                         id="mjestoDolaska"
                     />
 
-                    <label htmlFor="idVozila">Unesite ID vozila (1 - automobil, 2 - motocikl)</label>
-                    <input
+                    <label htmlFor="idVozila">Odaberite vrstu vozila</label>
+                    <select
                         value={idVozila}
                         onChange={(e) => setIdVozila(e.target.value)}
-                        type="number"
                         id="idVozila"
                         name="idVozila"
-                    />
+                    >
+                        <option value="">Odaberite vozilo</option>
+                        <option value="1">Automobil</option>
+                        <option value="2">Motocikl</option>
+                    </select>
 
                     <label htmlFor="brojKilometara">Unesite broj kilometara</label>
                     <input

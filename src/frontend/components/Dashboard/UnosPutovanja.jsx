@@ -12,38 +12,45 @@ export const UnosPutovanja = () => {
     const [idVozila, setIdVozila] = useState('');
     const location = useLocation();
     const { idKorisnika } = useContext(UserContext); // Dohvati idKorisnika iz konteksta
+    const [errorMessage, setErrorMessage] = useState('');
 
     const unesiPutovanje = (e) => {
         e.preventDefault();
-        Axios.post('http://localhost:3001/unosPutovanja', {
-            mjestoPolaska: mjestoPolaska,
-            mjestoDolaska: mjestoDolaska,
-            datumPutovanja: datumPutovanja,
-            brojKilometara: brojKilometara,
-            potrosnjaGoriva: potrosnjaGoriva,
-            idVozila: idVozila,
-            idKorisnika: idKorisnika, // Dodaj idKorisnika u zahtjev
-        })
-            .then((response) => {
-                if (response.data.message) {
-                    console.log(response.data);
-                } else {
-                    console.log(response.data);
-                }
-                // Prikazivanje prozora s porukom
-                alert('Vaše putovanje je uspješno uneseno.');
 
-                // Resetiranje inputa
-                setMjestoPolaska('');
-                setMjestoDolaska('');
-                setDatumPutovanja('');
-                setBrojKilometara('');
-                setPotrosnjaGoriva('');
-                setIdVozila('');
+        // Provjeri da li su sva polja popunjena
+        if (mjestoPolaska && mjestoDolaska && datumPutovanja && brojKilometara && potrosnjaGoriva && idVozila && idKorisnika) {
+            Axios.post('http://localhost:3001/unosPutovanja', {
+                mjestoPolaska: mjestoPolaska,
+                mjestoDolaska: mjestoDolaska,
+                datumPutovanja: datumPutovanja,
+                brojKilometara: brojKilometara,
+                potrosnjaGoriva: potrosnjaGoriva,
+                idVozila: idVozila,
+                idKorisnika: idKorisnika, // Dodaj idKorisnika u zahtjev
             })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then((response) => {
+                    if (response.data.message) {
+                        console.log(response.data);
+                    } else {
+                        console.log(response.data);
+                    }
+                    // Prikazivanje prozora s porukom
+                    alert('Vaše putovanje je uspješno uneseno.');
+
+                    // Resetiranje inputa
+                    setMjestoPolaska('');
+                    setMjestoDolaska('');
+                    setDatumPutovanja('');
+                    setBrojKilometara('');
+                    setPotrosnjaGoriva('');
+                    setIdVozila('');
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            setErrorMessage('Sva polja moraju biti popunjena!'); // Postavi grešku ako nisu sva polja popunjena
+        }
     };
 
     return (
@@ -139,7 +146,9 @@ export const UnosPutovanja = () => {
                         name="potrosnjaGoriva"
                     />
 
-                    <button className="gumb" type="submit" onSubmit={unesiPutovanje}>
+                    {errorMessage && <h1 style={{ color: 'red', fontSize: '15px', textAlign: 'center', marginTop: '20px' }}>{errorMessage}</h1>}
+                    
+                    <button className="gumb" type="submit">
                         Spremi putovanje
                     </button>
                 </form>
@@ -149,3 +158,4 @@ export const UnosPutovanja = () => {
 };
 
 export default UnosPutovanja;
+

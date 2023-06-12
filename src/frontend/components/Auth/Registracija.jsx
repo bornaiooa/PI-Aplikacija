@@ -20,26 +20,32 @@ export const Registracija = (props) => {
 
     const register = (e) => {
         e.preventDefault();
-        Axios.post("http://localhost:3001/registracija", {
-            name: name,
-            lastname: lastname,
-            email: email,
-            username: username,
-            password: pass,
-        }).then((response) => {
-            if (response.data.message) {
-                setRegisterStatus(response.data.message);
-            } else {
-                setRegisterStatus("Uspješno kreiran račun.");
-                alert("Uspješno ste registrirani. Prijavite se!"); // Dodani alert
-                navigate('/prijava');
-            }
-        })
-    }
+        
+        // Provjeri da li su sva polja popunjena
+        if (name && lastname && email && username && pass) {
+            Axios.post("http://localhost:3001/registracija", {
+                name: name,
+                lastname: lastname,
+                email: email,
+                username: username,
+                password: pass,
+            }).then((response) => {
+                if (response.data.message) {
+                    setRegisterStatus(response.data.message);
+                } else {
+                    setRegisterStatus("Uspješno kreiran račun.");
+                    alert("Uspješno ste registrirani. Prijavite se!"); // Dodani alert
+                    navigate('/prijava');
+                }
+            });
+        } else {
+            setRegisterStatus("Sva polja moraju biti popunjena!"); // Postavi grešku ako nisu sva polja popunjena
+        }
+    };
 
     const handlePrijava = () => {
         navigate('/prijava'); // Navigacija na "/registracija" rutu
-    }
+    };
 
     return (
         <div className="auth-form-container">
@@ -100,5 +106,5 @@ export const Registracija = (props) => {
             </form>
             {<button className="link-btn" onClick={handlePrijava}>Već imate račun? Prijavite se ovdje.</button>}
         </div>
-    )
-}
+    );
+};

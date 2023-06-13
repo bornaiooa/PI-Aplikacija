@@ -15,17 +15,21 @@ export const IzracunKilometara = () => {
         const placenoGorivo = parseFloat(kolicinaGoriva);
         const cijena1L = parseFloat(cijenaGoriva);
         const potrosnjaLkm = parseFloat(potrosnjaAuta);
+        //parseFloat()  funkcija koja pretvara vrijednost u broj s pomičnim zarezom (decimalnim brojem)
+
 
         // Provjeri jesu li unesene vrijednosti valjane brojeve
         if (isNaN(placenoGorivo) || isNaN(cijena1L) || isNaN(potrosnjaLkm)) {
             return;
         }
 
-        const kilometri = (placenoGorivo / (potrosnjaLkm / 10)).toFixed(2);
-        const brojLitara = (placenoGorivo / cijena1L).toFixed(2);
+        
+        const brojLitara = (placenoGorivo / cijena1L).toFixed(2); //formula za izračunavanje natočenih litara goriva
+        const kilometri = (brojLitara / (potrosnjaLkm / 100)).toFixed(2); // formula za izračunavanje kilometara koji će se prijeći
 
+    setIzracun(`Natočili ste ${brojLitara} litara i prijeći ćete ${kilometri} km!`);
 
-        setIzracun(`Možete prijeći ${kilometri} km za ${brojLitara} natočenih litara!`);
+        // setIzracun(`Možete prijeći ${kilometri} km te ste natočili ${brojLitara} litara!`);
     }
 
     const handleIzracunPotrosnje = () => {

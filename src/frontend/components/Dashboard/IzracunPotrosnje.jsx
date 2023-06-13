@@ -15,7 +15,7 @@ export const IzracunPotrosnje = (props) => {
   }
 
   const handleIzracunPrelaskaKilometrimaPoLitrama = () => {
-    navigate('/izracunPotrosnjeGoriva');
+    navigate('/izracunKM');
   }
 
 

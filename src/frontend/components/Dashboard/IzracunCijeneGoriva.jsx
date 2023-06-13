@@ -21,10 +21,10 @@ export const IzracunCijeneGoriva = () => {
             return;
         }
 
-        const brojLitara = (potrosnjaLkm * km / 100).toFixed(2);
-        const iznosNovca = (brojLitara * cijena1L).toFixed(2);
+        const brojLitara = (potrosnjaLkm * km / 100).toFixed(2); //formula za izracun litara goriva koje smo natočili
+        const iznosNovca = (brojLitara * cijena1L).toFixed(2); // iznos novaca koji moramo platiti za svoj put
 
-        setIzracun(`Za put od ${kilometri} km, potrošiti ćete ${brojLitara} litara goriva, za što ćete izdvojiti ${iznosNovca} kn.`);
+        setIzracun(`Za put od ${kilometri} km, potrošiti ćete ${brojLitara} litara goriva, što ćete platiti ${iznosNovca} eura.`);
     }
 
     const handleIzracunPotrosnje = () => {

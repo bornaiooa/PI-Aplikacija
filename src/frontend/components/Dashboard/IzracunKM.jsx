@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
-export const IzracunPotrosnjeGoriva = () => {
+export const IzracunKM = () => {
     const [kolicinaGoriva, setKolicinaGoriva] = useState('');
     const [potrosnjaAuta, setpotrosnjaAuta] = useState('');
     const [izracun, setIzracun] = useState('');
@@ -14,7 +14,8 @@ export const IzracunPotrosnjeGoriva = () => {
         e.preventDefault();
         const litaraGoriva = parseFloat(kolicinaGoriva);
         const prosjecnapotrosnjaAuta = parseFloat(potrosnjaAuta);
-    
+            //parseFloat()  funkcija koja pretvara vrijednost u broj s pomičnim zarezom (decimalnim brojem)
+            
         // Provjeri jesu li unesene vrijednosti valjani brojevi
         if (isNaN(litaraGoriva) || isNaN(prosjecnapotrosnjaAuta)) {
           return;

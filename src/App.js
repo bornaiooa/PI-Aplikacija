@@ -8,7 +8,7 @@ import { UnosPutovanja } from "./frontend/components/Dashboard/UnosPutovanja";
 import { IzracunPotrosnje } from "./frontend/components/Dashboard/IzracunPotrosnje";
 import { IzracunKilometara } from "./frontend/components/Dashboard/IzracunKilometara";
 import { IzracunCijeneGoriva } from "./frontend/components/Dashboard/IzracunCijeneGoriva";
-import { IzracunPotrosnjeGoriva } from "./frontend/components/Dashboard/IzracunPotrosnjeGoriva";
+import { IzracunKM } from "./frontend/components/Dashboard/IzracunKM";
 import { ListaPutovanja } from "./frontend/components/Dashboard/ListaPutovanja";
 import { InformacijeRacuna } from "./frontend/components/Dashboard/InformacijeRacuna";
 
@@ -40,7 +40,7 @@ function App() {
             
             <Route path="/listaPutovanja" element={<ListaPutovanja />} />
             <Route path="/informacijeRacuna" element={<InformacijeRacuna />} /> {/* Proslijedite idKorisnika kao prop */}
-            <Route path="/izracunPotrosnjeGoriva" element={<IzracunPotrosnjeGoriva />} />
+            <Route path="/izracunKM" element={<IzracunKM />} />
           </Routes>
         </Router>
       </UserContext.Provider>
